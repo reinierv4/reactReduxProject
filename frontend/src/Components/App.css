@@ -1,0 +1,22 @@
+.cat-list{
+  text-align: center;
+  list-style: none;
+}
+
+.cat-item{
+  display: inline-block;
+  background-color: #4CAF50; /* Green */
+  border: black;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  margin: 1px;
+}
+
+.post-list{
+  text-decoration: none;
+  list-style: none;
+}
+.post-item{
+
+}
