@@ -11,29 +11,38 @@ const PostListFilter = (props) => {
           {props.categories &&
             props.categories.map(category => {
               return(
-                <button 
-                    style={{ textDecoration: 'none', color: 'white'}}
-                    onClick= {() => {
-			          props.dispatch(filterByCategory(category.name))
-			        }}
-                  >
-                  <li className="cat-item" key={category.path} >
-                    {category.name} 
-                  </li>
-                </button>
+                <Link to={`/${category.name}`}
+                  style={{ textDecoration: 'none', color: 'black'}} 
+                > 
+                  <button 
+                      style={{ textDecoration: 'none', color: 'white'}}
+                      onClick= {() => {
+  			          props.dispatch(filterByCategory(category.name))
+  			        }}
+                    >
+                    <li className="cat-item" key={category.path} >
+                      {category.name} 
+                    </li>
+                  </button>
+                </Link>
                   
                 )
             })
           }
-          <button style={{ textDecoration: 'none', color: 'white'}} 
-          	onClick={() => {
-	        	props.dispatch(filterByCategory('all'))
-	      	}}
-	      > 
-	        <li className="cat-item" key='/'>
-            	All 
+          <Link to={'/'}
+                  style={{ textDecoration: 'none', color: 'black'}} 
+          > 
+            <button 
+              style={{ textDecoration: 'none', color: 'white'}} 
+              onClick={() => {
+      	        props.dispatch(filterByCategory('all'))
+      	      }}
+	          > 
+	          <li className="cat-item" key='/'>
+              All 
             </li> 
-		  </button>
+		        </button>
+          </Link>
 		  
    		</ul>
    	)

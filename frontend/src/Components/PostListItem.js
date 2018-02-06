@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const PostListItem = ({post}) => {
 	if(!post.deleted){
 		return(
-			<Link to={`/posts/${post.id}`}
+			<Link to={`/${post.category}/${post.id}`}
 	        	style={{ textDecoration: 'none', color: 'black'}} 
 	    	> 
 		        <div>

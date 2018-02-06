@@ -1,5 +1,4 @@
 export const getVisiblePosts = (posts, {category}) => { 
-	console.log(category)	
 	if(category == "all"){
 		return posts
 	}else{

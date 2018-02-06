@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import './App.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PostListItem from './PostListItem';
+import PostList from './PostList';
 import PostFilters from './PostFilters';
 import { getVisiblePosts } from '../selectors/posts'
 import { fetchPosts } from '../actions/posts'
 import { fetchCategories } from '../actions/categories'
-
+import { filterByCategory } from '../actions/filters'
 import * as API from '../utils/api';
 
 class App extends Component {
@@ -15,24 +16,22 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
     this.props.dispatch(fetchCategories());
+    //this.props.dispatch(filterByCategory(state.match.params.category));
   }
   
   render() {
     return (
       <div className="App">
-        <PostFilters />
+        <Route exact path="/" component={PostFilters} />
+        <Route exact path="/:category" component={PostFilters} />
         <hr/>
-        <ul className="post-list">
-          {this.props.posts &&
-            this.props.posts.map(post => {
-              return(
-                <li className="post-item" key={post.id} > 
-                  <PostListItem post={post} />
-                </li>
-              )
-            })
-          }
-        </ul>
+        {console.log(this.props)}
+        <Route exact path="/:category" render = { () => (
+            <PostList 
+              posts={this.props.posts} 
+            />
+          )
+        }/>
       </div>
     );
   }
