@@ -1,5 +1,5 @@
 export const getVisiblePosts = (posts, {category}) => { 
-	if(category == "all"){
+	if(category === "all"){
 		return posts
 	}else{
 		return posts.filter((post) => {

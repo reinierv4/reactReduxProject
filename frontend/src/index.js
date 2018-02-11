@@ -7,6 +7,7 @@ import './index.css';
 import App from './Components/App';
 import registerServiceWorker from './registerServiceWorker';
 
+
 const store = configureStore();
 const jsx = (
 	<Provider store= { store } >

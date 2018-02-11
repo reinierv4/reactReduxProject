@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PostListItem from './PostListItem'
+import { filterByCategory } from '../actions/filters'
 
 
-const PostList = (props) => {
-	console.log(props.params);
-	return(
-		<ul className="post-list">
-          {props.posts &&
-            props.posts.map(post => {
-              return(
-                <li className="post-item" key={post.id} > 
-                  <PostListItem post={post} />
-                </li>
-              )
-            })
-          }
-        </ul>
-	)
+class PostList extends Component {
+	
+  componentDidMount() {
+     this.props.dispatch(filterByCategory(this.props.filter));
+  }
 
+  componentWillReceiveProps() {
+	   this.props.dispatch(filterByCategory(this.props.filter));
+	}
+
+	render(){
+		return(
+			<ul className="post-list">
+          		{this.props.posts &&
+            		this.props.posts.map(post => {
+              	return(
+                	<li className="post-item" key={post.id} > 
+                  		<PostListItem post={post} />
+                	</li>
+              	)
+            	})
+          		}
+        	</ul>
+        );
+    }
 }
 
 export default PostList;
