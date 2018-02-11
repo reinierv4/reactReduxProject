@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PostList from './PostList';
 import PostFilters from './PostFilters';
 import Post from './Post'
+import AddPostPage from './AddPostPage'
 import { getVisiblePosts } from '../selectors/posts'
 import { fetchPosts } from '../actions/posts'
 import { fetchCategories } from '../actions/categories'
@@ -40,12 +41,16 @@ class App extends Component {
             />
           )
         }/>
-        <Route exact path="/:category/:post" render = { (routeProps) => (
-            <Post 
-              post={this.props.posts.find(p => p.id === routeProps.match.params.post)}
-            />
+        
+        <Route path="/:category/:post" render = { (routeProps) => (
+            routeProps.match.params.category === "post" && routeProps.match.params.post === "new"
+            ? <AddPostPage/>
+            : <Post 
+                post={this.props.posts.find(p => p.id === routeProps.match.params.post)}
+              />
           )
         }/>
+       
       </div>
     );
   }

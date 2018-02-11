@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom';
-import { filterByCategory } from '../actions/filters'
-import {withRouter} from 'react-router-dom'
 import './App.css';
 
 const PostListFilter = (props) => {
