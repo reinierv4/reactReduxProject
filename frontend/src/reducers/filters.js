@@ -7,10 +7,10 @@ const filtersReducerDefaultState = {
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
 	switch (action.type) {
-		case constants.SORT_BY_DATE:
+		case constants.SORT_BY:
 			return {
 				...state,
-				sortBy: 'date'
+				sortBy: action.order
 			};
 		case constants.FILTER_BY_CATEGORY:
 			return{

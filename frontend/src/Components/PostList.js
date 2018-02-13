@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import PostListItem from './PostListItem'
-import { filterByCategory } from '../actions/filters'
-import { Link } from 'react-router-dom'
+import PostListItem from './PostListItem';
+import { filterByCategory } from '../actions/filters';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 
 class PostList extends Component {
 	
-  componentDidMount() {
-     this.props.dispatch(filterByCategory(this.props.filter));
+  componentDidUpdate() {
+    //This peice of code is executed here because I don't know how to dispatch this action within App.js 
+    if(this.props.routeCategory !== this.props.category){
+      this.props.dispatch(filterByCategory(this.props.routeCategory));
+    }
   }
 
- //  componentWillReceiveProps() {
-	//    this.props.dispatch(filterByCategory(this.props.filter));
-	// }
-
-	render(){
+  render(){
 		return(
 			<div>
         <ul className="post-list">
@@ -38,4 +39,10 @@ class PostList extends Component {
   }
 }
 
-export default PostList;
+const mapStateToProps = (state) => {
+  return({
+    posts: state.posts,
+    category: state.category,
+  })
+}
+export default withRouter(connect(mapStateToProps)(PostList));

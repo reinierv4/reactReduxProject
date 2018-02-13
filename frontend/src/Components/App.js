@@ -27,17 +27,13 @@ class App extends Component {
         
         <Route exact path="/:category" render = { (routeProps) => (
             <PostList 
-              dispatch = {this.props.dispatch}
-              posts={this.props.posts} 
-              filter = {routeProps.match.params.category}
+              routeCategory = {routeProps.match.params.category}
             />
           )
         }/>
         <Route exact path="/" render = { () => (
             <PostList 
-              dispatch = {this.props.dispatch}
-              posts={this.props.posts} 
-              filter = {'all'}
+              routeCategory = {'all'}
             />
           )
         }/>
@@ -66,4 +62,3 @@ const mapStateToProps = (state) =>  {
 }
 
 export default withRouter(connect(mapStateToProps)(App));
-//{if props.filters.category === {post.}}

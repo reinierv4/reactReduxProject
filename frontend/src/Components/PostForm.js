@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 class PostForm extends Component {
 
@@ -14,28 +15,34 @@ class PostForm extends Component {
 			author: '',
 			title: '',
 			message: '',
+			category: '',
 			id: this.props.id
-	  	};
+		};
 	  }
-	  
+	  //How can I do this more elegant? Application crashed once, because this.props.categories was undef?
+	  this.props.categories && this.setState(() => ({category: this.props.categories[0].name}))
 	}
 	
-
 	onPostBodyChange = (e) => {
-		const body = e.target.value
+		const body = e.target.value;
 		this.setState(() => ({ body }));
 		
 	};
 
 	onTitleChange = (e) => {
-		const title = e.target.value
+		const title = e.target.value;
 		this.setState(() => ({ title }));
 	};
 
 	onAuthorChange = (e) => {
-		const author = e.target.value
+		const author = e.target.value;
 		this.setState(() => ({ author }));
 	};
+
+	onChangeCategory = (e) => {
+		const category = e.target.value;
+		this.setState(() => ({category}))
+	}
 
 	onSubmitPost = (e) => {
 		e.preventDefault();
@@ -47,6 +54,7 @@ class PostForm extends Component {
 				title: this.state.title,
 				author: this.state.author,
 				body: this.state.body,
+				category: this.state.category
 			})
 		}
 	};
@@ -75,6 +83,11 @@ class PostForm extends Component {
 						value={this.state.body}
 						onChange={this.onPostBodyChange}
 					/>
+					<select value={this.state.value} onChange={this.onChangeCategory}>
+						{this.props.categories && this.props.categories.map( (category) => {
+							return <option value={category.name}>{category.name}</option>
+						})}
+			        </select>
 					<button>
 						Add Post
 					</button>
@@ -84,4 +97,10 @@ class PostForm extends Component {
 	}
 }
 
-export default PostForm;
+const mapStateToProps = (state) => {
+	return{
+		categories: state.categories
+	}
+}
+
+export default connect(mapStateToProps)(PostForm);

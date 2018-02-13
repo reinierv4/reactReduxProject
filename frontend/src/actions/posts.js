@@ -18,7 +18,7 @@ export const fetchPosts = () => dispatch => (
     )
 );
 
-export const addPost = ( { title='', author='', body='', category='redux'} = {} ) => ({
+export const addPost = ( { title='', author='', body='', category=''} = {} ) => ({
 	type: ADD_POST,
 	post: {
 		id: uuid(),

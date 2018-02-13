@@ -3,7 +3,6 @@ import PostNotFound from './PostNotFound'
 import CommentForm from './CommentForm'
 import { connect } from 'react-redux';
 import { fetchComments } from '../actions/comments'
-import { receiveComments } from '../actions/comments'
 import { withRouter } from 'react-router-dom'
 
 

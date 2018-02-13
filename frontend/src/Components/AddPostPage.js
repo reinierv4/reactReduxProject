@@ -31,9 +31,13 @@ class  AddPostPage extends Component {
 
 export default connect()(AddPostPage);
 
-
+//Add button to delete a post
+//Add connection to server upon post creation/deletion
 //Check video for doing the edit post
 //Add comment support
 //Change voteScore feature
 //Change CommentScore
+//Add a sorting option on the main page
+//Add data validation
+
 //DONEDONEODNE
