@@ -42,7 +42,7 @@ class PostList extends Component {
 const mapStateToProps = (state) => {
   return({
     posts: state.posts,
-    category: state.category,
+    category: state.filters.category,
   })
 }
 export default withRouter(connect(mapStateToProps)(PostList));

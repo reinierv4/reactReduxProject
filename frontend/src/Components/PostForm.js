@@ -42,7 +42,7 @@ class PostForm extends Component {
 	onChangeCategory = (e) => {
 		const category = e.target.value;
 		this.setState(() => ({category}))
-	}
+	};
 
 	onSubmitPost = (e) => {
 		e.preventDefault();
