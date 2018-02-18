@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, browserHistory } from 'react-router-dom';
 import './App.css';
 import { connect } from 'react-redux';
 import PostList from './PostList';
@@ -17,7 +17,14 @@ class App extends Component {
     this.props.dispatch(fetchPosts());
     this.props.dispatch(fetchCategories());
   }
+
+  componentDidUpdate(){
+    //console.log(window.location.href.split('/'));
+    console.log("updateing all");
+  }
+
   
+
   render() {
     return (
       <div className="App">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom';
-import { sortBy } from '../actions/filters'
+import { sortBy, filterByCategory } from '../actions/filters'
 import './App.css';
 
 class PostListFilter extends Component {
@@ -22,7 +22,7 @@ class PostListFilter extends Component {
                 style={{ textDecoration: 'none', color: 'black'}} 
                 key={`/${category.name}`}
               > 
-                <li className="cat-item" key={category.path} >
+                <li className="cat-item" key={category.path} onClick={ () => this.props.dispatch(filterByCategory(category.name))} >
                   {category.name} 
                 </li>
               </Link>
@@ -33,7 +33,7 @@ class PostListFilter extends Component {
           style={{ textDecoration: 'none', color: 'black'}} 
           key={'/'}
         >      
-          <li className="cat-item" key='/'>
+          <li className="cat-item" key='/' onClick={ () => this.props.dispatch(filterByCategory("all"))}>
             All 
           </li> 
         </Link>

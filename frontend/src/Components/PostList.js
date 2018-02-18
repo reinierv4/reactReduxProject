@@ -4,6 +4,7 @@ import { filterByCategory } from '../actions/filters';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { getVisiblePosts } from '../selectors/posts'
 
 
 class PostList extends Component {
@@ -13,6 +14,7 @@ class PostList extends Component {
     if(this.props.routeCategory !== this.props.category){
       this.props.dispatch(filterByCategory(this.props.routeCategory));
     }
+    console.log(this.props);
   }
 
   render(){
@@ -40,8 +42,9 @@ class PostList extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return({
-    posts: state.posts,
+    posts: getVisiblePosts(state.posts, state.filters),
     category: state.filters.category,
   })
 }

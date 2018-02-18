@@ -59,7 +59,7 @@ class Post extends Component {
 					{this.props.comments && 
 						this.props.comments.map( (c) => {
 							return (
-								<div> 
+								<div key={c.title}> 
 									<p>{c.body} </p>
 									{`Score: ${c.voteScore}`}<button>up</button> <button>down</button>
 								</div>

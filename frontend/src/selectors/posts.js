@@ -2,6 +2,7 @@ export const getVisiblePosts = (posts, {category}) => {
 	if(category === "all"){
 		return posts
 	}else{
+		console.log(`actually applying a filter for category ${category}`)
 		return posts.filter((post) => {
 			return post.category === category
 		})

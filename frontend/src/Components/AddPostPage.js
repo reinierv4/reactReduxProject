@@ -31,11 +31,15 @@ class  AddPostPage extends Component {
 
 export default connect()(AddPostPage);
 
-//Add connection to server upon post creation/deletion
+
+
+//Fix category filter
 //Check video for doing the edit post
 //Add comment support
 //Change CommentScore
+//Server connection, delete works (implemented but don't work)
 //Add a sorting option on the main page
 //Add data validation
+
 
 //DONEDONEODNE

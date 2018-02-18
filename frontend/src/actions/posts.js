@@ -11,21 +11,12 @@ export const receivePosts = posts => ({
   posts
 });
 
-export const deletePost = postId => ({
+export const deletePostAction = postId => ({
 	type: DELETE_POST,
 	postId: postId
 })
 
-export const fetchPosts = () => dispatch => (
-  API
-    .getAll()
-    .then(  (posts) => {
-    		dispatch(receivePosts(posts))
-    	}	
-    )
-);
-
-export const changeVoteScore = (postId, scoreChange) => ({
+export const changeVoteScoreAction = (postId, scoreChange) => ({
 	type: CHANGE_VOTE_SCORE,
 	postId,
 	scoreChange
@@ -45,3 +36,30 @@ export const addPost = ( { title='', author='', body='', category=''} = {} ) => 
 	}
 	
 });
+
+//Asyncs
+export const fetchPosts = () => dispatch => (
+  API
+    .getAll()
+    .then(  (posts) => {
+    		dispatch(receivePosts(posts))
+    	}	
+    )
+);
+
+export const deletePost = (postId) => dispatch => (
+	API
+		.deletePost(postId)
+		.then( () => {
+			dispatch(deletePostAction(postId))
+		})
+)
+
+export const changeVoteScore = (postId, scoreChange) => dispatch => (
+	API
+		.changeVoteScore(postId, scoreChange)
+		.then( (data) => {
+			dispatch(changeVoteScoreAction(postId, scoreChange))
+		})
+)
+

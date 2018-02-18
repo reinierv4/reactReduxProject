@@ -25,3 +25,19 @@ export const getComments = (postId) =>
 	fetch(`${api_root}/posts/${postId}/comments`, {headers})
 	.then(res => res.json())
 	.then(data => data) 
+
+export const deletePost = (postId) => 
+	fetch(`${api_root}/posts/${postId}`,{ headers, method: 'DELETE' })
+	.then(res => res.json())
+	.then(data => data)
+
+export const changeVoteScore = (postId, scoreChange) => 
+	scoreChange>0 ? 
+	fetch(`${api_root}/posts/${postId}?option=upVote`,{ headers, method: 'PUT' })
+	.then(res => res.json())
+	.then(data => data)
+	: fetch(`${api_root}/posts/${postId}?option=downVote`,{ headers, method: 'PUT' } )
+	.then(res => res.json())
+	.then(data => data)
+	
+	
