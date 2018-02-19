@@ -33,8 +33,6 @@ export default connect()(AddPostPage);
 
 
 
-//Fix category filter
-//Check video for doing the edit post
 //Add comment support
 //Change CommentScore
 //Server connection, delete works (implemented but don't work)

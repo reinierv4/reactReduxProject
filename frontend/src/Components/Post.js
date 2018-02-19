@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fetchComments } from '../actions/comments';
 import { changeVoteScore } from '../actions/posts';
 import { deletePost } from '../actions/posts';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom'
 
 
@@ -56,10 +56,13 @@ class Post extends Component {
 					<CommentForm/>	
 					<div> {`Score: ${post.voteScore}`} <button onClick={this.handleUpVote}>up</button> <button onClick={this.handleDownVote}>down</button></div> 
 					<button onClick={this.deletePost}>Delete</button>
+					<Link to={`/${post.category}/${post.id}/edit`}>
+          				<button>Edit</button>
+        			</Link>
 					{this.props.comments && 
 						this.props.comments.map( (c) => {
 							return (
-								<div key={c.title}> 
+								<div key={c.id}> 
 									<p>{c.body} </p>
 									{`Score: ${c.voteScore}`}<button>up</button> <button>down</button>
 								</div>

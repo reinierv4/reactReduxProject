@@ -5,22 +5,31 @@ class PostForm extends Component {
 
 	constructor(props) {
 	  super(props);
-	  if(props.post){
+	  const { post } = props;
+	  console.log(post);
+	  if(post){
 	  	this.state = {
-		    props
+		    body: post.body,
+			author: post.author,
+			title: post.title,
+			message: '',
+			category: post.category,
+			id: post.id,
+			edit: true
 	  	};
+	  	console.log(this.state);
 	  }else{
 	  	this.state = {
 		    body: '',
 			author: '',
 			title: '',
 			message: '',
-			category: '',
-			id: this.props.id
+			category: this.props.categories[0] ? this.props.categories[0].name : "",
+			id: this.props.id,
+			edit: false
 		};
+
 	  }
-	  //How can I do this more elegant? Application crashed once, because this.props.categories was undef?
-	  this.props.categories && this.setState(() => ({category: this.props.categories[0].name}))
 	}
 	
 	onPostBodyChange = (e) => {
@@ -54,7 +63,8 @@ class PostForm extends Component {
 				title: this.state.title,
 				author: this.state.author,
 				body: this.state.body,
-				category: this.state.category
+				category: this.state.category,
+				id: this.state.id
 			})
 		}
 	};
@@ -83,13 +93,13 @@ class PostForm extends Component {
 						value={this.state.body}
 						onChange={this.onPostBodyChange}
 					/>
-					<select value={this.state.value} onChange={this.onChangeCategory}>
+					<select value={this.state.category} onChange={this.onChangeCategory}>
 						{this.props.categories && this.props.categories.map( (category) => {
-							return <option value={category.name}>{category.name}</option>
+							return <option key={category.name} value={category.name}>{category.name}</option>
 						})}
 			        </select>
 					<button>
-						Add Post
+						{this.state.edit ? "Edit Post" : "Add Post"}
 					</button>
 				</form>
 			</div>

@@ -7,7 +7,22 @@ const postReducer = (state = postReducerDefaultState, action) => {
 		case constants.RECEIVE_POSTS:
 			return state.concat(action.posts);
 		case constants.ADD_POST:
-			return state.concat(action.post)
+			return state.concat(action.post);
+		case constants.EDIT_POST:
+			return state.map( (p) => {
+				const { id, title, body, author, category } = action.post;
+				if(p === id){
+					return({
+						...p,
+						title,
+						body,
+						author,
+						category
+					})
+				}else{
+					return p;
+				}
+			})
 		case constants.CHANGE_VOTE_SCORE:
 			return state.map( (p) => {
 				if(p.id === action.postId){

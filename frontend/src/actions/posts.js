@@ -3,6 +3,7 @@ import uuid from 'uuid';
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const ADD_POST = "ADD_POST";
+export const EDIT_POST = "EDIT_POST";
 export const CHANGE_VOTE_SCORE = "CHANGE_VOTE_SCORE";
 export const DELETE_POST = "DELETE_POST";
 
@@ -35,6 +36,17 @@ export const addPost = ( { title='', author='', body='', category=''} = {} ) => 
 		commentCount: 0 
 	}
 	
+});
+
+export const editPost = ({title, author, body, category, id}) => ({
+	type: EDIT_POST,
+	post: {
+		id,
+		title,
+		body,
+		author,
+		category,
+	}
 });
 
 //Asyncs
