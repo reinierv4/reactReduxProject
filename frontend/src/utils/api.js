@@ -6,6 +6,7 @@ if (!token)
 
 const headers = {
   'Accept': 'application/json',
+  'Content-Type': 'application/json',
   'Authorization': token
 }
 
@@ -25,6 +26,20 @@ export const getComments = (postId) =>
 	fetch(`${api_root}/posts/${postId}/comments`, {headers})
 	.then(res => res.json())
 	.then(data => data) 
+
+export const addComment = (postId, comment) => 
+	fetch(`${api_root}/comments`, 
+			{ 	headers, 
+				method: 'POST', 
+				body: JSON.stringify({
+					id: comment.id,
+					timestamp: comment.timestamp,
+					body: comment.body,
+					author: comment.author,
+					parentId: postId
+				})
+			}
+		)
 
 export const deletePost = (postId) => 
 	fetch(`${api_root}/posts/${postId}`,{ headers, method: 'DELETE' })

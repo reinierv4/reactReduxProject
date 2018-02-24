@@ -14,7 +14,6 @@ class PostList extends Component {
     if(this.props.routeCategory !== this.props.category){
       this.props.dispatch(filterByCategory(this.props.routeCategory));
     }
-    console.log(this.props);
   }
 
   render(){
@@ -42,7 +41,6 @@ class PostList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return({
     posts: getVisiblePosts(state.posts, state.filters),
     category: state.filters.category,

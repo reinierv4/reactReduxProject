@@ -4,18 +4,17 @@ import CommentForm from './CommentForm'
 import { connect } from 'react-redux';
 import { fetchComments } from '../actions/comments';
 import { changeVoteScore } from '../actions/posts';
+import { addComment } from '../actions/comments';
 import { deletePost } from '../actions/posts';
 import { withRouter, Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+
 
 
 class Post extends Component {	
 	
 	componentDidMount() {
-		const {post} = this.props;
-		if(post && !post.deleted ){
-	    	this.props.dispatch(fetchComments(post.id));
-	    }
+		this.props.dispatch(fetchComments(this.props.postId));
 	}
 
 	constructor(props){
@@ -42,7 +41,6 @@ class Post extends Component {
 		this.setState({
 			redirect: true
 		})
-
 	}
 
 	render () {
@@ -53,18 +51,22 @@ class Post extends Component {
 					<h1>{`${post.title} by ${post.author}`}</h1>
 					<section>{post.body}</section>
 					<p>Submit new comment: </p>
-					<CommentForm/>	
+					<CommentForm 
+						onSubmit={ (comment, author) => {
+							this.props.dispatch( addComment(post.id, comment, author) )
+						}}
+					/>	
 					<div> {`Score: ${post.voteScore}`} <button onClick={this.handleUpVote}>up</button> <button onClick={this.handleDownVote}>down</button></div> 
 					<button onClick={this.deletePost}>Delete</button>
 					<Link to={`/${post.category}/${post.id}/edit`}>
           				<button>Edit</button>
         			</Link>
-					{this.props.comments && 
-						this.props.comments.map( (c) => {
+        			{this.props.comments && 
+						Object.entries(this.props.comments).map( (c) => {
 							return (
-								<div key={c.id}> 
-									<p>{c.body} </p>
-									{`Score: ${c.voteScore}`}<button>up</button> <button>down</button>
+								<div key={c[1].id}> 
+									<p>{c[1].body} </p>
+									{`Score: ${c[1].voteScore}`}<button>up</button> <button>down</button>
 								</div>
 							)
 						})
@@ -84,23 +86,12 @@ class Post extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
 	return {
-		...this.props,
+		...ownProps,
 		comments: state.comments,
 	};
 }
 export default withRouter(connect(mapStateToProps)(Post));
 
 
-// "6ni6ok3ym7mf1p33lnez": {
-//     id: '6ni6ok3ym7mf1p33lnez',
-//     timestamp: 1468479767190,
-//     title: 'Learn Redux in 10 minutes!',
-//     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-//     author: 'thingone',
-//     category: 'redux',
-//     voteScore: -5,
-//     deleted: false,
-//     commentCount: 0
-//   }

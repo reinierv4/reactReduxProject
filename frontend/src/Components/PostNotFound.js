@@ -7,16 +7,14 @@ const PostNotFound = () => {
 		<div>
 			<h1> Post not found..  </h1>
 			<Link to={'/'}
-              style={{ textDecoration: 'none', color: 'black'}} 
-              key={'/'}
-          	> 
-             
-	          <div className="cat-item" key='/'>
+            style={{ textDecoration: 'none', color: 'black'}} 
+            key={'/'}
+      > 
+      	<div className="cat-item" key='/'>
               Home
-             </div> 
-            
-		  </Link>
         </div> 
+      </Link>
+    </div> 
  	)
 }
 

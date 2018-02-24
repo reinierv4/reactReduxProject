@@ -33,7 +33,7 @@ export default connect()(AddPostPage);
 
 
 
-//Add comment support
+//Handle addComment action in reducer
 //Change CommentScore
 //Server connection, delete works (implemented but don't work)
 //Add a sorting option on the main page

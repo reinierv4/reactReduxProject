@@ -44,12 +44,13 @@ class App extends Component {
             ? <AddPostPage/>
             : <Post 
                 post={this.props.posts.find(p => p.id === routeProps.match.params.post)}
+                postId={routeProps.match.params.post}
               />
           )
         }/>
         <Route exact path="/:category/:post/edit" render = { (routeProps) => (
             <EditPostPage 
-              post={this.props.posts.filter(p => p.id === routeProps.match.params.post)[0]}
+              post={this.props.posts.find(p => p.id === routeProps.match.params.post)}
             />
           )
         }/>

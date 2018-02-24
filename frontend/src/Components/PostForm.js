@@ -6,7 +6,6 @@ class PostForm extends Component {
 	constructor(props) {
 	  super(props);
 	  const { post } = props;
-	  console.log(post);
 	  if(post){
 	  	this.state = {
 		    body: post.body,
@@ -17,8 +16,7 @@ class PostForm extends Component {
 			id: post.id,
 			edit: true
 	  	};
-	  	console.log(this.state);
-	  }else{
+	 }else{
 	  	this.state = {
 		    body: '',
 			author: '',

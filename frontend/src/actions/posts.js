@@ -7,6 +7,7 @@ export const EDIT_POST = "EDIT_POST";
 export const CHANGE_VOTE_SCORE = "CHANGE_VOTE_SCORE";
 export const DELETE_POST = "DELETE_POST";
 
+
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
@@ -31,9 +32,10 @@ export const addPost = ( { title='', author='', body='', category=''} = {} ) => 
 		body,
 		author,
 		category,
+		timestamp: Date.now(),
 		voteScore: 0,
 		deleted: false,
-		commentCount: 0 
+		commentCount: 0
 	}
 	
 });
@@ -48,6 +50,7 @@ export const editPost = ({title, author, body, category, id}) => ({
 		category,
 	}
 });
+
 
 //Asyncs
 export const fetchPosts = () => dispatch => (
