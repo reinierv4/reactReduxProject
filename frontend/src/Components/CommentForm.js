@@ -2,9 +2,16 @@ import React, {Component} from 'react'
 
 class CommentForm extends Component {
 	
-	state = {
-		comment: '',
-		author: ''
+	
+
+	constructor(props) {
+	  super(props);
+	  const { comment } = props;
+	  this.state = {
+			comment: comment ? comment.body : '',
+			author: comment ? comment.author : '',
+			editForm: comment ? true : false
+		}
 	}
 
 	onCommentChange = (e) => {
@@ -19,7 +26,11 @@ class CommentForm extends Component {
 
 	onSubmitComment = (e) => {
 		e.preventDefault();
-		this.props.onSubmit(this.state.comment, this.state.author);
+		if(this.state.editForm){
+			this.props.onSubmit(this.state.comment, this.state.author)
+		}else{
+			this.props.onSubmit(this.state.comment)
+		}
 	}
 
 	render() {
@@ -29,6 +40,7 @@ class CommentForm extends Component {
 					<input
 						type="text"
 						placeholder="Your name.."
+						readOnly={this.state.editForm}
 						value={this.state.author}
 						onChange={this.onAuthorChange}
 					/>
@@ -37,7 +49,8 @@ class CommentForm extends Component {
 						value={this.state.comment}
 						onChange={this.onCommentChange}
 					/>
-					<button> Submit Comment </button>
+					{this.state.editForm ? <button> Edit Comment </button> : <button> Submit Comment </button>}
+					
 				</form>
 			</div>
 		)

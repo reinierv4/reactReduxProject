@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import PostNotFound from './PostNotFound'
-import CommentForm from './CommentForm'
+import PostNotFound from './PostNotFound';
+import CommentForm from './CommentForm';
+import Comment from './Comment';
 import { connect } from 'react-redux';
 import { fetchComments } from '../actions/comments';
 import { changeVoteScore } from '../actions/posts';
@@ -50,27 +51,26 @@ class Post extends Component {
 				<div> 
 					<h1>{`${post.title} by ${post.author}`}</h1>
 					<section>{post.body}</section>
-					<p>Submit new comment: </p>
+					<div> {`Score: ${post.voteScore}`} <button onClick={this.handleUpVote}>up</button> <button onClick={this.handleDownVote}>down</button></div> 
+					<button onClick={this.deletePost}>Delete</button>
+					<Link to={`/${post.category}/${post.id}/edit`}>
+          	<button>Edit</button>
+        	</Link>
+        	<p>Submit new comment: </p>
 					<CommentForm 
 						onSubmit={ (comment, author) => {
 							this.props.dispatch( addComment(post.id, comment, author) )
 						}}
-					/>	
-					<div> {`Score: ${post.voteScore}`} <button onClick={this.handleUpVote}>up</button> <button onClick={this.handleDownVote}>down</button></div> 
-					<button onClick={this.deletePost}>Delete</button>
-					<Link to={`/${post.category}/${post.id}/edit`}>
-          				<button>Edit</button>
-        			</Link>
-        			{this.props.comments && 
-						Object.entries(this.props.comments).map( (c) => {
-							return (
-								<div key={c[1].id}> 
-									<p>{c[1].body} </p>
-									{`Score: ${c[1].voteScore}`}<button>up</button> <button>down</button>
-								</div>
+					/>
+					{this.props.comments && 
+						this.props.comments.map( (c) => {
+							return(
+								<Comment commentId={c.id} key={c.id}/>
 							)
 						})
 					}
+					
+						
 					{this.state.redirect && 
 						<Redirect to={{pathname: '/'}}/>}
 				</div>
@@ -86,9 +86,8 @@ class Post extends Component {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
 	return {
-		...ownProps,
 		comments: state.comments,
 	};
 }

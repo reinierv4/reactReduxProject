@@ -46,13 +46,44 @@ export const deletePost = (postId) =>
 	.then(res => res.json())
 	.then(data => data)
 
-export const changeVoteScore = (postId, scoreChange) => 
-	scoreChange>0 ? 
-	fetch(`${api_root}/posts/${postId}?option=upVote`,{ headers, method: 'PUT' })
+export const changeVoteScore = (postId, scoreChange) => {
+	const vote = scoreChange>0 ? "upVote" : "downVote";
+	return(
+		fetch(`${api_root}/posts/${postId}`,{ headers, method: 'POST', body: JSON.stringify({
+			option: vote})
+		})
+		.then(res => res.json())
+		.then(data => data)
+	)
+}
+
+export const editComment = (commentId, comment) => 
+	fetch(`${api_root}/comments/${commentId}`, {headers, method: 'PUT', body: JSON.stringify({
+		body: comment,
+		timestamp: Date.now()
+		})
+	})
 	.then(res => res.json())
 	.then(data => data)
-	: fetch(`${api_root}/posts/${postId}?option=downVote`,{ headers, method: 'PUT' } )
+
+
+export const deleteComment = (commentId) => 
+	fetch(`${api_root}/comments/${commentId}`,{ headers, method: 'DELETE'})
 	.then(res => res.json())
 	.then(data => data)
+
+export const changeVoteScoreComment = (commentId, scoreChange) => {
+	const vote = scoreChange>0 ? "upVote" : "downVote";
+	return(
+		fetch(`${api_root}/comments/${commentId}`,{ headers, method: 'POST', body: JSON.stringify({
+			option: vote})
+		})
+		.then(res => res.json())
+		.then(data => data)
+	)
+}
+	
+	
+	
 	
 	
