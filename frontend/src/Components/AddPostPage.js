@@ -34,7 +34,7 @@ export default connect()(AddPostPage);
 
 
 
-//Add a sorting option on the main page
+//Display additional variables according to spec udemy
 //Add data validation
 
 

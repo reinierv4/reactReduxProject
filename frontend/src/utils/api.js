@@ -57,6 +57,19 @@ export const changeVoteScore = (postId, scoreChange) => {
 	)
 }
 
+export const addPost = ({id, timestamp, title, body, author, category}) =>
+	fetch(`${api_root}/posts`, {headers, method: 'POST', body: JSON.stringify({
+		id,
+		timestamp,
+		title,
+		body,
+		author,
+		category
+	})})
+	.then( res => res.json())
+	.then( data => data)
+
+
 export const editComment = (commentId, comment) => 
 	fetch(`${api_root}/comments/${commentId}`, {headers, method: 'PUT', body: JSON.stringify({
 		body: comment,

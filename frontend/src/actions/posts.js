@@ -24,20 +24,14 @@ export const changeVoteScoreAction = (postId, scoreChange) => ({
 	scoreChange
 })
 
-export const addPost = ( { title='', author='', body='', category=''} = {} ) => ({
+export const addPostAction = ( post ) => ({
 	type: ADD_POST,
 	post: {
-		id: uuid(),
-		title,
-		body,
-		author,
-		category,
-		timestamp: Date.now(),
+		...post,
 		voteScore: 0,
 		deleted: false,
 		commentCount: 0
 	}
-	
 });
 
 export const editPost = ({title, author, body, category, id}) => ({
@@ -61,6 +55,25 @@ export const fetchPosts = () => dispatch => (
     	}	
     )
 );
+
+export const addPost = ( { title='', author='', body='', category=''} = {} ) => (dispatch) => {
+	const post = {
+		id: uuid(),
+		title,
+		body,
+		author,
+		category,
+		timestamp: Date.now(),
+	}
+
+	return(
+		API
+			.addPost(post)
+			.then( () => {
+				dispatch(addPostAction(post))
+			})
+	)
+}
 
 export const deletePost = (postId) => dispatch => (
 	API

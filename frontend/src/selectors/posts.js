@@ -1,13 +1,29 @@
-export const getVisiblePosts = (posts, {category}) => { 
+export const getVisiblePosts = (posts, {category, sortBy}) => { 
+	
 	if(category === "all"){
-		return posts
+		return sortPosts(posts)
 	}else{
-		console.log(`actually applying a filter for category ${category}`)
-		return posts.filter((post) => {
+		return sortPosts(posts.filter((post) => {
 			return post.category === category
+		}))
+	}
+
+	function sortPosts(posts){
+		return (posts).sort((a,b) => {
+			if(sortBy === 'date'){
+				return a.timestamp < b.timestamp ? 1 : -1
+			}else if(sortBy === 'score'){
+				return a.voteScore < b.voteScore ? 1 : -1
+			}else if(sortBy === 'title'){
+				console.log("sorting by title..");
+				return a.title < b.title ? -1 : 1
+			}else{
+				return posts
+			}
 		})
 	}
 }
+
 
 	// return posts.filter((posts) => {
 	// 	const startDateMatch =  typeof startDate !== 'number' || posts.createdAt >= startDate;
