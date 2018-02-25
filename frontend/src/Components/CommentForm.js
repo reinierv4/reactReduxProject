@@ -26,10 +26,11 @@ class CommentForm extends Component {
 
 	onSubmitComment = (e) => {
 		e.preventDefault();
+		
 		if(this.state.editForm){
-			this.props.onSubmit(this.state.comment, this.state.author)
-		}else{
 			this.props.onSubmit(this.state.comment)
+		}else{
+			this.props.onSubmit(this.state.comment, this.state.author)
 		}
 	}
 

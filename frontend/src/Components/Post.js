@@ -54,9 +54,10 @@ class Post extends Component {
 					<div> {`Score: ${post.voteScore}`} <button onClick={this.handleUpVote}>up</button> <button onClick={this.handleDownVote}>down</button></div> 
 					<button onClick={this.deletePost}>Delete</button>
 					<Link to={`/${post.category}/${post.id}/edit`}>
-          	<button>Edit</button>
-        	</Link>
-        	<p>Submit new comment: </p>
+          				<button>Edit</button>
+        		</Link>
+
+        	<p>{post.commentCount} comment, submit new comment below: </p>
 					<CommentForm 
 						onSubmit={ (comment, author) => {
 							this.props.dispatch( addComment(post.id, comment, author) )

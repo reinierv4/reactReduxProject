@@ -35,7 +35,6 @@ export default connect()(AddPostPage);
 
 
 //Display additional variables according to spec udemy
-//Add data validation
+//README
 
 
-//DONEDONEODNE

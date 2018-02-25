@@ -29,7 +29,8 @@ class Comment extends Component {
 		if(this.props.comment && !this.props.comment.deleted){
 			return(
 				<div key={this.props.comment.id}> 
-					<p>{this.props.comment.body} </p>
+
+					<p>{this.props.comment.author} says: {this.props.comment.body}  </p>
 					{`Score: ${this.props.comment.voteScore}`}
 					<button onClick={this.handleUpVote}>up</button> 
 					<button onClick={this.handleDownVote}>down</button>
