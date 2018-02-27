@@ -23,8 +23,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path="/" component={PostFilters} />
-        <Route exact path="/:category" component={PostFilters} />
+        <Route path="/" component={PostFilters}/>
+        
         <hr/>
         
         <Route exact path="/:category" render = { (routeProps) => (
